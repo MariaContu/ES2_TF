@@ -11,11 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IRepCliente extends JpaRepository<Cliente, Long> {
     public Cliente findByNome(String nome);
-    public Cliente listarPorNome(String nome);
-    public Cliente listarPorId(Long id);
-    public Cliente listarPorIdCliente(Long idCliente);
     public Cliente save(Client cliente);
 
-    @Query("SELECT c FROM Cliente c WHERE c.id = :id")
-    public Cliente buscarClientePorId(@Param("id") Long id);
+    @Query("SELECT c FROM Cliente c WHERE c.codigo = :codigo")
+    public Cliente buscarClientePorCodigo(@Param("codigo") Long codigo);
 }

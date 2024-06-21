@@ -75,8 +75,8 @@ public class ServicoCadastramento {
     }
 
     public Assinatura cadastrarAssinatura(Long clienteId, Long aplicativoCodigo) {
-        Cliente cli = repCliente.buscarClientePorId(clienteId);
-        Aplicativo app = repAplicativo.buscarAplicativoPorId(aplicativoCodigo);
+        Cliente cli = repCliente.buscarClientePorCodigo(clienteId);
+        Aplicativo app = repAplicativo.buscarAplicativoPorCodigo(aplicativoCodigo);
 
         if (cli.isPresent() && app.isPresent()) {
             Assinatura ass = new Assinatura();

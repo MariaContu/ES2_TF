@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IRepPagamento extends JpaRepository<Pagamento, Long> {
-    List<Pagamento> findByCodAssinatura(Long codAssinatura);
+    List<Pagamento> findByCodigo(Long codigo);
 }
