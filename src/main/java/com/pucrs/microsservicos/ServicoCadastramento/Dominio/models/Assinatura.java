@@ -19,7 +19,7 @@ public class Assinatura {
 
     @ManyToOne
     @JoinColumn(name = "cod_App")
-    private Aplicativo codApp;
+    private Aplicativo aplicativo;
 
     @ManyToOne
     @JoinColumn(name = "cod_Cli")
@@ -32,7 +32,7 @@ public class Assinatura {
         AssinaturaDTO dto = new AssinaturaDTO();
         dto.setCodigo(this.codigo);
         dto.setCliente(this.cliente);
-        dto.setCodApp(this.codApp);
+        dto.setCodApp(this.aplicativo);
         dto.setInicioVigencia(this.inicioVigencia);
         dto.setFimVigencia(this.fimVigencia);
         dto.setStatus(this.fimVigencia.isAfter(LocalDate.now()) ? "ATIVA" : "CANCELADA");

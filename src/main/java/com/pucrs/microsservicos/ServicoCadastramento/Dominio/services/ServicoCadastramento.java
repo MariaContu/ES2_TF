@@ -1,9 +1,11 @@
 package com.pucrs.microsservicos.ServicoCadastramento.Dominio.services;
 
+import com.pucrs.microsservicos.ServicoCadastramento.Dominio.events.PagServCadEvent;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.*;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,11 +27,14 @@ public class ServicoCadastramento {
     @Autowired
     private IRepAplicativo repAplicativo;
 
-    public ServicoCadastramento(IRepCliente repCliente, IRepAssinatura repAssinatura, IRepPagamento repPagamento, IRepAplicativo repAplicativo) {
+    private final ApplicationEventPublisher eventPublisher;
+
+    public ServicoCadastramento(IRepCliente repCliente, IRepAssinatura repAssinatura, IRepPagamento repPagamento, IRepAplicativo repAplicativo, ApplicationEventPublisher eventPublisher) {
         this.repCliente = repCliente;
         this.repAssinatura = repAssinatura;
         this.repPagamento = repPagamento;
         this.repAplicativo = repAplicativo;
+        this.eventPublisher = eventPublisher;
     }
 
     public Cliente cadastrarCliente(Cliente cliente) {
@@ -82,7 +87,7 @@ public class ServicoCadastramento {
         if (cli!=null && app!=null) {
             Assinatura ass = new Assinatura();
             ass.setCliente(cli);
-            ass.setCodApp(app);
+            ass.setAplicativo(app);
             ass.setInicioVigencia(LocalDate.now());
             ass.setFimVigencia(LocalDate.now().plusDays(7)); // 7 dias grátis
 
@@ -104,7 +109,7 @@ public class ServicoCadastramento {
         if (assinaturaExistenteOpt.isPresent()) {
             Assinatura assinaturaExistente = assinaturaExistenteOpt.get();
             
-            assinaturaExistente.setCodApp(novosDados.getCodApp());
+            assinaturaExistente.setAplicativo(novosDados.getAplicativo());
             assinaturaExistente.setCliente(novosDados.getCliente());
             assinaturaExistente.setInicioVigencia(novosDados.getInicioVigencia());
             assinaturaExistente.setFimVigencia(novosDados.getFimVigencia());
@@ -189,6 +194,20 @@ public class ServicoCadastramento {
                 return null;
         }
     }
-    
+
+    public List<Assinatura> getAssinaturasByCliente(Long codCli) {
+        return repAssinatura.findByCliente_Codigo(codCli);
+    }
+
+    public List<Assinatura> getAssinaturasByCodApp(Long codApp) {
+        return repAssinatura.findByAplicativo_Codigo(codApp);
+    }
+
+    public void confirmarPagamento(Long codCli, Long codApp) {
+        PagServCadEvent event = new PagServCadEvent(codCli, codApp, true);
+        eventPublisher.publishEvent(event);
+    }
+
+
 
 }

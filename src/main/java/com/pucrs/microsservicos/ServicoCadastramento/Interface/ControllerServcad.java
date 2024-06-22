@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/servcad")
-public class Controller {
+public class ControllerServcad {
     
     @Autowired
     private ServicoCadastramento servicoCadastramento;
@@ -33,13 +32,13 @@ public class Controller {
 
     @PostMapping("/assinaturas")
     public ResponseEntity<Assinatura> criaAssinatura(@RequestBody Assinatura novaAssinatura)  {
-        Assinatura assinatura = servicoCadastramento.cadastrarAssinatura(novaAssinatura.getCliente().getCodigo(), novaAssinatura.getCodApp().getCodigo());
+        Assinatura assinatura = servicoCadastramento.cadastrarAssinatura(novaAssinatura.getCliente().getCodigo(), novaAssinatura.getAplicativo().getCodigo());
         return ResponseEntity.ok(assinatura);
     }
 
     @PatchMapping("/aplicativos/{idAplicativo}")
     public ResponseEntity<Aplicativo> atualizarCustoMensal(@PathVariable Long idAplicativo, @RequestBody Map<String, Float> custo) {
-        float novoCusto = custo.get("custo");
+        float novoCusto = custo.get("novoCusto");
         Aplicativo aplicativoAtualizado = servicoCadastramento.atualizarCustoMensal(idAplicativo, novoCusto);
         return ResponseEntity.ok(aplicativoAtualizado);
     }
@@ -50,6 +49,14 @@ public class Controller {
         List<AssinaturaDTO> assinaturaDTOs = assinaturas.stream().map(Assinatura::convertToDTO).collect(Collectors.toList());
         return ResponseEntity.ok(assinaturaDTOs);
     }
-    
 
+    @GetMapping("/asscli/{codcli}")
+    public List<Assinatura> getAssinaturasByCliente(@PathVariable Long codcli) {
+        return servicoCadastramento.getAssinaturasByCliente(codcli);
+    }
+
+    @GetMapping("/assapp/{codapp}")
+    public List<Assinatura> getAssinaturasByAPlicativo(@PathVariable Long codapp) {
+        return servicoCadastramento.getAssinaturasByCodApp(codapp);
+    }
 }
