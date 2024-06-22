@@ -78,7 +78,7 @@ public class ServicoCadastramento {
         Cliente cli = repCliente.buscarClientePorCodigo(clienteId);
         Aplicativo app = repAplicativo.buscarAplicativoPorCodigo(aplicativoCodigo);
 
-        if (cli.isPresent() && app.isPresent()) {
+        if (cli!=null && app!=null) {
             Assinatura ass = new Assinatura();
             ass.setCliente(cli);
             ass.setCodApp(app);

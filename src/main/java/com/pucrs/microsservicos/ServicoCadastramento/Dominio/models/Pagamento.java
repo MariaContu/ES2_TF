@@ -10,9 +10,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+@Data
 @Builder
 @AllArgsConstructor
-@Data
+@NoArgsConstructor
 @Entity
 public class Pagamento {
 

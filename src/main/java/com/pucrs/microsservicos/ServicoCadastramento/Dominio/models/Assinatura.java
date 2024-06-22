@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 public class Assinatura {
     @Id
