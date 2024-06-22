@@ -1,6 +1,8 @@
-package com.pucrs.microsservicos.ServicoCadastramento.Dominio.models;
+package com.pucrs.microsservicos.ServicoCadastramento.Dominio.dto;
 
 import java.util.Date;
+
+import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +16,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Pagamento {
+public class PagamentoDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;

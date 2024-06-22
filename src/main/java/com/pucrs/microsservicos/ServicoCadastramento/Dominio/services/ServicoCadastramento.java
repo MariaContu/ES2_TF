@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicoCadastramento {
@@ -157,5 +158,37 @@ public class ServicoCadastramento {
     public List<Aplicativo> listarApps() {
         return repAplicativo.findAll();
     }
+
+    public Aplicativo atualizarCustoMensal(Long id, float novoCusto) {
+        Optional<Aplicativo> aplicativoExistenteOpt = repAplicativo.findById(id);
+    
+        if (aplicativoExistenteOpt.isPresent()) {
+            Aplicativo aplicativoExistente = aplicativoExistenteOpt.get();
+            aplicativoExistente.setCustoMensal(novoCusto);
+            return repAplicativo.save(aplicativoExistente);
+        } else {
+            throw new RuntimeException("Aplicativo não encontrado com o ID: " + id);
+        }
+    }
+
+    public List<Assinatura> buscarAssinaturasPorTipo(String tipo) {
+        List<Assinatura> todasAssinaturas = repAssinatura.findAll();
+
+        switch (tipo.toUpperCase()) {
+            case "ATIVAS":
+                return todasAssinaturas.stream()
+                    .filter(assinatura -> assinatura.getFimVigencia().isAfter(LocalDate.now()))
+                    .collect(Collectors.toList());
+            case "CANCELADAS":
+                return todasAssinaturas.stream()
+                    .filter(assinatura -> assinatura.getFimVigencia().isBefore(LocalDate.now()))
+                    .collect(Collectors.toList());
+            case "TODAS":
+                return todasAssinaturas;
+            default:
+                return null;
+        }
+    }
+    
 
 }

@@ -2,6 +2,8 @@ package com.pucrs.microsservicos.ServicoCadastramento.Dominio.models;
 
 import java.time.LocalDate;
 
+import com.pucrs.microsservicos.ServicoCadastramento.Dominio.dto.AssinaturaDTO;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,4 +27,16 @@ public class Assinatura {
 
     private LocalDate inicioVigencia;
     private LocalDate fimVigencia;
+
+    public AssinaturaDTO convertToDTO() {
+        AssinaturaDTO dto = new AssinaturaDTO();
+        dto.setCodigo(this.codigo);
+        dto.setCliente(this.cliente);
+        dto.setCodApp(this.codApp);
+        dto.setInicioVigencia(this.inicioVigencia);
+        dto.setFimVigencia(this.fimVigencia);
+        dto.setStatus(this.fimVigencia.isAfter(LocalDate.now()) ? "ATIVA" : "CANCELADA");
+        return dto;
+    }
+
 }
