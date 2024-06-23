@@ -1,0 +1,6 @@
+branch-defaults:
+  marcio-branch:
+    environment: null
+    group_suffix: null
+global:
+  profile: eb-cli
