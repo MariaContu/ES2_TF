@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IRepClienteServCad extends JpaRepository<Cliente, Long> {
+public interface IRepCliente extends JpaRepository<Cliente, Long> {
     public Cliente findByNome(String nome);
     public Cliente save(Cliente cliente);
 

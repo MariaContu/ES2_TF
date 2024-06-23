@@ -4,7 +4,6 @@ import com.pucrs.microsservicos.ServicoPagamentos.Dominio.events.PagServCadEvent
 import com.pucrs.microsservicos.ServicoPagamentos.Dominio.models.*;
 import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.*;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class ServicoPagamentos {
     public void registrarPagamento(int dia, int mes, int ano, Long codass, float valorPago) {
         Optional<AssinaturaServPag> assOpt = buscarAssinaturaPorId(codass);
 
-        if (assOpt != null) {
+        if (assOpt.isPresent()) {
             AssinaturaServPag ass = assOpt.get();
                 
             // Criação do pagamento

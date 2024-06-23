@@ -2,7 +2,7 @@ package com.pucrs.microsservicos.ServicoPagamentos.Dominio.dto;
 
 import java.util.Date;
 
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.*;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.models.*;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +21,7 @@ public class PagamentoDTOServPag {
     private Long codigo;
     @ManyToOne
     @JoinColumn(name = "cod_Assinatura")
-    private Assinatura assinatura;
+    private AssinaturaServPag assinatura;
     private Float valorPago;
     private Date dataPagamento;
     

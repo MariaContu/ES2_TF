@@ -2,7 +2,7 @@ package com.pucrs.microsservicos.ServicoCadastramento.Dominio.listeners;
 
 import com.pucrs.microsservicos.ServicoPagamentos.Dominio.events.PagServCadEvent;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.Assinatura;
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepAssinaturaServCad;
+import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepAssinatura;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -14,9 +14,9 @@ import java.util.Optional;
 @Component
 public class PagServCadListener {
 
-    private final IRepAssinaturaServCad repAssinatura;
+    private final IRepAssinatura repAssinatura;
 
-    public PagServCadListener(IRepAssinaturaServCad repAssinatura) {
+    public PagServCadListener(IRepAssinatura repAssinatura) {
         this.repAssinatura = repAssinatura;
     }
 

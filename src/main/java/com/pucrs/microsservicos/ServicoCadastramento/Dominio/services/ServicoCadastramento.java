@@ -14,19 +14,19 @@ import java.util.stream.Collectors;
 @Service
 public class ServicoCadastramento {
     @Autowired
-    private IRepClienteServCad repCliente;
+    private IRepCliente repCliente;
 
     @Autowired
-    private IRepAssinaturaServCad repAssinatura;
+    private IRepAssinatura repAssinatura;
 
     @Autowired
-    private IRepPagamentoServCad repPagamento;
+    private IRepPagamento repPagamento;
 
     @Autowired
-    private IRepAplicativoServCad repAplicativo;
+    private IRepAplicativo repAplicativo;
 
 
-    public ServicoCadastramento(IRepClienteServCad repCliente, IRepAssinaturaServCad repAssinatura, IRepPagamentoServCad repPagamento, IRepAplicativoServCad repAplicativo) {
+    public ServicoCadastramento(IRepCliente repCliente, IRepAssinatura repAssinatura, IRepPagamento repPagamento, IRepAplicativo repAplicativo) {
         this.repCliente = repCliente;
         this.repAssinatura = repAssinatura;
         this.repPagamento = repPagamento;
