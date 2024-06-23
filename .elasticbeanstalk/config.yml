@@ -1,10 +1,10 @@
 branch-defaults:
-  marcio-branch:
+  main:
     environment: null
     group_suffix: null
 global:
   application_name: ES2_TF
-  branch: marcio-branch
+  branch: main
   default_ec2_keyname: aws-eb
   default_platform: Corretto 17 running on 64bit Amazon Linux 2023
   default_region: us-west-2
