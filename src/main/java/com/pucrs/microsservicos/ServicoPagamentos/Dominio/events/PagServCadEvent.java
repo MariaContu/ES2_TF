@@ -1,4 +1,4 @@
-package com.pucrs.microsservicos.ServicoCadastramento.Dominio.events;
+package com.pucrs.microsservicos.ServicoPagamentos.Dominio.events;
 
 import lombok.Getter;
 
