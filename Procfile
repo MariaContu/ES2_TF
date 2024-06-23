@@ -1,1 +1,2 @@
-web: java -jar target/Trabalho_Final_ENGSOFT2.jar
+web: java -jar build/libs/Trabalho_Final_ENGSOFT2-0.0.1-SNAPSHOT.jar
+
