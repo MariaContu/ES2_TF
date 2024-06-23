@@ -1,2 +1,2 @@
-web: java -jar build/libs/Trabalho_Final_ENGSOFT2-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/microsservicos-0.0.1-SNAPSHOT.jar
 
