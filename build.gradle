@@ -38,7 +38,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-bootJar {
-    mainClassName = 'com.pucrs.microsservicos.MicrosservicosApplication'
-}
