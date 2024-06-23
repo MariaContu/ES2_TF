@@ -3,4 +3,16 @@ branch-defaults:
     environment: null
     group_suffix: null
 global:
+  application_name: ES2_TF
+  branch: marcio-branch
+  default_ec2_keyname: aws-eb
+  default_platform: Corretto 17 running on 64bit Amazon Linux 2023
+  default_region: us-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
   profile: eb-cli
+  repository: ES2_TF
+  sc: git
+  workspace_type: Application
