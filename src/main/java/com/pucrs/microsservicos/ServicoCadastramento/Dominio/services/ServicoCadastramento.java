@@ -2,13 +2,8 @@ package com.pucrs.microsservicos.ServicoCadastramento.Dominio.services;
 
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.*;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.*;
-import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepAplicativo;
-import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepAssinatura;
-import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepCliente;
-import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepPagamento;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

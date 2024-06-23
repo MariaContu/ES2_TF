@@ -19,23 +19,23 @@ public class ServicoPagamentos {
     private EventPublisher eventPublisher;
 
     @Autowired
-    private IRepPagamento repPagamento;
+    private IRepPagamentoServPag repPagamento;
 
     @Autowired
-    private IRepAssinatura repAssinatura;
+    private IRepAssinaturaServPag repAssinatura;
 
-    public Optional<Assinatura> buscarAssinaturaPorId(Long id) {
+    public Optional<AssinaturaServPag> buscarAssinaturaPorId(Long id) {
         return repAssinatura.findById(id);
     }
 
     public void registrarPagamento(int dia, int mes, int ano, Long codass, float valorPago) {
-        Optional<Assinatura> assOpt = buscarAssinaturaPorId(codass);
+        Optional<AssinaturaServPag> assOpt = buscarAssinaturaPorId(codass);
 
         if (assOpt != null) {
-            Assinatura ass = assOpt.get();
+            AssinaturaServPag ass = assOpt.get();
                 
             // Criação do pagamento
-            Pagamento pagamento = new Pagamento();
+            PagamentoServPag pagamento = new PagamentoServPag();
             pagamento.setAssinatura(ass);
             pagamento.setValorPago(valorPago);
 

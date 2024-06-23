@@ -15,13 +15,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Pagamento {
+public class PagamentoServPag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
     @ManyToOne
     @JoinColumn(name = "cod_Assinatura")
-    private Assinatura assinatura;
+    private AssinaturaServPag assinatura;
     private Float valorPago;
     private Date dataPagamento;
     

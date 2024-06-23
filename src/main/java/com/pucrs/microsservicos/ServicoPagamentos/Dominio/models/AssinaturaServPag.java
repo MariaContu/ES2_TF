@@ -2,7 +2,7 @@ package com.pucrs.microsservicos.ServicoPagamentos.Dominio.models;
 
 import java.time.LocalDate;
 
-import com.pucrs.microsservicos.ServicoPagamentos.Dominio.dto.AssinaturaDTO;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.dto.AssinaturaDTOServPag;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,24 +12,24 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Assinatura {
+public class AssinaturaServPag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
     @ManyToOne
     @JoinColumn(name = "cod_App")
-    private Aplicativo aplicativo;
+    private AplicativoServPag aplicativo;
 
     @ManyToOne
     @JoinColumn(name = "cod_Cli")
-    private Cliente cliente;
+    private ClienteServPag cliente;
 
     private LocalDate inicioVigencia;
     private LocalDate fimVigencia;
 
-    public AssinaturaDTO convertToDTO() {
-        AssinaturaDTO dto = new AssinaturaDTO();
+    public AssinaturaDTOServPag convertToDTO() {
+        AssinaturaDTOServPag dto = new AssinaturaDTOServPag();
         dto.setCodigo(this.codigo);
         dto.setCliente(this.cliente);
         dto.setCodApp(this.aplicativo);

@@ -15,7 +15,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagamentoDTO {
+public class PagamentoDTOServPag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;

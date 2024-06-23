@@ -1,6 +1,5 @@
-package com.pucrs.microsservicos.ServicoPagamentos.Dominio.models;
+package com.pucrs.microsservicos.ServicoPagamentos.Dominio.dto;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,8 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Cliente {
+public class ClienteDTOServPag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;

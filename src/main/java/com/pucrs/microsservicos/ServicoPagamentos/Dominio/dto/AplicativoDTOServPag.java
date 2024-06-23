@@ -1,4 +1,4 @@
-package com.pucrs.microsservicos.ServicoPagamentos.Dominio.models;
+package com.pucrs.microsservicos.ServicoPagamentos.Dominio.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,8 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Aplicativo {
+public class AplicativoDTOServPag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
@@ -17,3 +16,4 @@ public class Aplicativo {
 
     private Float custoMensal;
 }
+

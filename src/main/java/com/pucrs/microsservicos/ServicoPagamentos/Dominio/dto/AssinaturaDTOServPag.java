@@ -11,18 +11,18 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssinaturaDTO {
+public class AssinaturaDTOServPag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
     @ManyToOne
     @JoinColumn(name = "cod_App")
-    private Aplicativo codApp;
+    private AplicativoServPag codApp;
 
     @ManyToOne
     @JoinColumn(name = "cod_Cli")
-    private Cliente cliente;
+    private ClienteServPag cliente;
 
     private LocalDate inicioVigencia;
     private LocalDate fimVigencia;
