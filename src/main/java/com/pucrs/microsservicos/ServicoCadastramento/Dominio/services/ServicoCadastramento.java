@@ -1,8 +1,11 @@
 package com.pucrs.microsservicos.ServicoCadastramento.Dominio.services;
 
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.events.PagServCadEvent;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.*;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.*;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepAplicativo;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepAssinatura;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepCliente;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.IRepPagamento;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -16,25 +19,23 @@ import java.util.stream.Collectors;
 @Service
 public class ServicoCadastramento {
     @Autowired
-    private IRepCliente repCliente;
+    private IRepClienteServCad repCliente;
 
     @Autowired
-    private IRepAssinatura repAssinatura;
+    private IRepAssinaturaServCad repAssinatura;
 
     @Autowired
-    private IRepPagamento repPagamento;
+    private IRepPagamentoServCad repPagamento;
 
     @Autowired
-    private IRepAplicativo repAplicativo;
+    private IRepAplicativoServCad repAplicativo;
 
-    private final ApplicationEventPublisher eventPublisher;
 
-    public ServicoCadastramento(IRepCliente repCliente, IRepAssinatura repAssinatura, IRepPagamento repPagamento, IRepAplicativo repAplicativo, ApplicationEventPublisher eventPublisher) {
+    public ServicoCadastramento(IRepClienteServCad repCliente, IRepAssinaturaServCad repAssinatura, IRepPagamentoServCad repPagamento, IRepAplicativoServCad repAplicativo) {
         this.repCliente = repCliente;
         this.repAssinatura = repAssinatura;
         this.repPagamento = repPagamento;
         this.repAplicativo = repAplicativo;
-        this.eventPublisher = eventPublisher;
     }
 
     public Cliente cadastrarCliente(Cliente cliente) {
@@ -202,12 +203,5 @@ public class ServicoCadastramento {
     public List<Assinatura> getAssinaturasByCodApp(Long codApp) {
         return repAssinatura.findByAplicativo_Codigo(codApp);
     }
-
-    public void confirmarPagamento(Long codCli, Long codApp) {
-        PagServCadEvent event = new PagServCadEvent(codCli, codApp, true);
-        eventPublisher.publishEvent(event);
-    }
-
-
 
 }

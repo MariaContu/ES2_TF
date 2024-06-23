@@ -4,13 +4,17 @@ import lombok.Getter;
 
 @Getter
 public class PagServCadEvent {
-    private Long codCli;
-    private Long codApp;
-    private boolean pagamentoConfirmado;
+    private Long codAss;
+    private float valorPago;
+    private int dia;
+    private int mes;
+    private int ano;
 
-    public PagServCadEvent(Long codCli, Long codApp, boolean pagamentoConfirmado) {
-        this.codCli = codCli;
-        this.codApp = codApp;
-        this.pagamentoConfirmado = pagamentoConfirmado;
+    public PagServCadEvent(Long codAss, float valorPago, int dia, int mes, int ano) {
+        this.codAss = codAss;
+        this.valorPago = valorPago;
+        this.dia = dia;
+        this.mes = mes;
+        this.ano = ano;
     }
 }

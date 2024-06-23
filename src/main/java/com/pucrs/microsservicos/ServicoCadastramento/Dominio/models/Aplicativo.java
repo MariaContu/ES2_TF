@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "AplicativoServCad")
 public class Aplicativo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

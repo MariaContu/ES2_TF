@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IRepPagamento extends JpaRepository<Pagamento, Long> {
+public interface IRepPagamentoServCad extends JpaRepository<Pagamento, Long> {
     List<Pagamento> findByCodigo(Long codigo);
 }

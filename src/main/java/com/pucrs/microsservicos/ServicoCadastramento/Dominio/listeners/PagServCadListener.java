@@ -1,41 +1,34 @@
 package com.pucrs.microsservicos.ServicoCadastramento.Dominio.listeners;
 
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.events.PagServCadEvent;
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.Aplicativo;
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.events.PagServCadEvent;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.Assinatura;
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.Cliente;
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepAplicativo;
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepAssinatura;
-import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepCliente;
-import org.springframework.context.event.EventListener;
+import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepAssinaturaServCad;
+
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import static com.pucrs.microsservicos.RabbitMQConfig.QUEUENAME;
+
+import java.util.Optional;
 
 @Component
 public class PagServCadListener {
 
-    private final IRepAssinatura repAssinatura;
-    private final IRepAplicativo repAplicativo;
-    private final IRepCliente repCliente;
+    private final IRepAssinaturaServCad repAssinatura;
 
-    public PagServCadListener(IRepAssinatura repAssinatura, IRepAplicativo repAplicativo, IRepCliente repCliente) {
+    public PagServCadListener(IRepAssinaturaServCad repAssinatura) {
         this.repAssinatura = repAssinatura;
-        this.repAplicativo = repAplicativo;
-        this.repCliente = repCliente;
     }
 
-    @EventListener
+    @RabbitListener(queues = QUEUENAME)
     public void handlePagServCadEvent(PagServCadEvent event) {
-        if (event.isPagamentoConfirmado()) {
-            Assinatura novaAssinatura = new Assinatura();
-            Cliente cliente = repCliente.buscarClientePorCodigo(event.getCodCli());
-            Aplicativo aplicativo = repAplicativo.buscarAplicativoPorCodigo(event.getCodApp());
-            novaAssinatura.setCliente(cliente);
-            novaAssinatura.setAplicativo(aplicativo);
-            novaAssinatura.setInicioVigencia(LocalDate.now());
-            novaAssinatura.setFimVigencia(LocalDate.now().plusMonths(1));
-            repAssinatura.save(novaAssinatura);
+        Optional<Assinatura> assinaturaOpt = repAssinatura.findById(event.getCodAss());
+
+        if (assinaturaOpt.isPresent()) {
+            Assinatura assinatura = assinaturaOpt.get();
+            // Atualiza a vigência da assinatura conforme a lógica de negócio
+            assinatura.setFimVigencia(assinatura.getFimVigencia().plusMonths(1));
+            repAssinatura.save(assinatura);
         }
     }
 }
