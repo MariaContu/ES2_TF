@@ -12,7 +12,9 @@ services:
       - es2-network
 
   servico-cadastramento:
-    build: ./src/main/java/com/pucrs/microsservicos/ServicoCadastramento
+    build:
+      context: .
+      dockerfile: src/main/java/com/pucrs/microsservicos/ServicoCadastramento/Dockerfile
     depends_on:
       - rabbitmq
     environment:
@@ -24,7 +26,9 @@ services:
       - es2-network
 
   servico-pagamentos:
-    build: ./src/main/java/com/pucrs/microsservicos/ServicoPagamentos
+    build:
+      context: .
+      dockerfile: src/main/java/com/pucrs/microsservicos/ServicoPagamentos/Dockerfile
     depends_on:
       - rabbitmq
     environment:

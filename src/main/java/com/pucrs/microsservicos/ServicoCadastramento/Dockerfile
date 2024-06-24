@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copie o arquivo JAR da sua aplicação para o contêiner
-COPY build/libs/ServicoCadastramento.jar /app/ServicoCadastramento.jar
+COPY build/libs/microsservicos-0.0.1-SNAPSHOT-plain.jar /app/ServicoCadastramento.jar
 
 # Comando para executar a aplicação
 ENTRYPOINT ["java", "-jar", "/app/ServicoCadastramento.jar"]
