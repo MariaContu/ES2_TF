@@ -1,5 +1,6 @@
 package com.pucrs.microsservicos.ServicoPagamentos.Dominio.services;
 
+import com.pucrs.microsservicos.ServicoPagamentos.Dominio.events.PagServAssValEvent;
 import com.pucrs.microsservicos.ServicoPagamentos.Dominio.events.PagServCadEvent;
 import com.pucrs.microsservicos.ServicoPagamentos.Dominio.models.*;
 import com.pucrs.microsservicos.ServicoPagamentos.Dominio.repositories.*;
@@ -48,9 +49,12 @@ public class ServicoPagamentos {
             repPagamento.save(pagamento);
 
             // Publica o evento de pagamento
-            PagServCadEvent event = new PagServCadEvent(codass, valorPago, dia, mes, ano);
-            eventPublisher.publishPagServCadEvent(event);
+            PagServCadEvent eventCad = new PagServCadEvent(codass, valorPago, dia, mes, ano);
+            eventPublisher.publishPagServCadEvent(eventCad);
 
+            //publica outro evento
+            PagServAssValEvent eventAss = new PagServAssValEvent(codass, valorPago, dia, mes, ano);
+            eventPublisher.publishPagServAssValEvent(eventAss);
         }
     }
     
