@@ -5,6 +5,7 @@ import com.pucrs.microsservicos.ServicoCadastramento.Dominio.models.Assinatura;
 import com.pucrs.microsservicos.ServicoCadastramento.Dominio.repositories.IRepAssinatura;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static com.pucrs.microsservicos.RabbitMQConfig.QUEUENAME;
@@ -14,21 +15,19 @@ import java.util.Optional;
 @Component
 public class PagServCadListener {
 
-    private final IRepAssinatura repAssinatura;
-
-    public PagServCadListener(IRepAssinatura repAssinatura) {
-        this.repAssinatura = repAssinatura;
-    }
+    @Autowired
+    private IRepAssinatura repAssinatura;
 
     @RabbitListener(queues = QUEUENAME)
     public void handlePagServCadEvent(PagServCadEvent event) {
         Optional<Assinatura> assinaturaOpt = repAssinatura.findById(event.getCodAss());
+        System.out.println("listener servcad acessado");
 
         if (assinaturaOpt.isPresent()) {
             Assinatura assinatura = assinaturaOpt.get();
-            // Atualiza a vigência da assinatura conforme a lógica de negócio
             assinatura.setFimVigencia(assinatura.getFimVigencia().plusMonths(1));
             repAssinatura.save(assinatura);
+            System.out.println("servcad funcionou!");
         }
     }
 }
