@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copie o arquivo JAR da sua aplicação para o contêiner
-COPY build/libs/ServicoPagamentos.jar /app/ServicoPagamentos.jar
+COPY build/libs/microsservicos-0.0.1-SNAPSHOT-plain.jar /app/ServicoPagamentos.jar
 
 # Comando para executar a aplicação
 ENTRYPOINT ["java", "-jar", "/app/ServicoPagamentos.jar"]
