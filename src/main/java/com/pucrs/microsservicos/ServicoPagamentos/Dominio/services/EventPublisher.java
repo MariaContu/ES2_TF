@@ -16,7 +16,6 @@ public class EventPublisher {
         rabbitTemplate.convertAndSend("pagamentos.cadastramento", event);
     }
 
-    // Adicione este método para publicar o evento PagServAssValEvent
     public void publishPagServAssValEvent(PagServAssValEvent event) {
         rabbitTemplate.convertAndSend("pagamentos.assinaturasvalidas", event);
     }
